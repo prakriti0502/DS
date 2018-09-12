@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 struct BST
 {
@@ -112,6 +113,23 @@ void findMax()
 	}
 	cout<<"Maximum element is "<<check->info<<endl;
 }
+void Level_order_traversing()
+{
+	BST *ptr ;
+	queue <BST *> myqueue;
+	myqueue.push(root);
+	ptr = myqueue.front();
+	while(!myqueue.empty())
+	{
+		myqueue.pop();
+		cout<<ptr->info<<"\t";
+		if(ptr->left != NULL)
+			myqueue.push(ptr->left);
+		if(ptr->right != NULL)  //we have to check both left and right, thats why we use if and if and not else.
+			myqueue.push(ptr->right);
+		ptr=myqueue.front();
+	}
+}
 int main()
 {
 	char ch;
@@ -124,6 +142,7 @@ int main()
 		cout<<"To search an element press 2\n";
 		cout<<"To find minimum element press 3\n";
 		cout<<"To find maximum element press 4\n";
+		cout<<"For level order traversing(left then right), press 5\n";
 		cin>>what;
 		switch(what)
 		{
@@ -145,6 +164,11 @@ int main()
 			case 4:
 				{
 					findMax();
+					break;
+				}
+			case 5:
+				{
+					Level_order_traversing();
 					break;
 				}
 		}
