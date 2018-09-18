@@ -1,40 +1,44 @@
 #include<iostream>
-#include<cstring>
 #include<math.h>
+#include<string.h>
 using namespace std;
-class eval
+class Evaluate
 {
-	char postfix[50];
 	int stack[50],top,i,res;
+	char postfix[50];
 	public:
-		eval()
+		Evaluate()
 		{
-			top=-1;
-			i =0 ;
-			cout<<"Enter postfix\n";
+			top = -1;
+			i = 0;
+		}
+		void input()
+		{
+			cout<<"Enter postfix expression that you wish to evaluate\n";
 			cin>>postfix;
 		}
 		void push(int num)
 		{
 			top++;
-			stack[top]=num;
+			stack[top] = num;
 		}
 		int pop()
 		{
-			int x=stack[top];
+			int x = stack[top];
 			top--;
 			return x;
 		}
-		void find()
+		void evaluateExp()
 		{
-			while(postfix[i]!='\0')
+			//int res;
+			while(postfix[i] != '\0')
 			{
 				if(isdigit(postfix[i]))
-					res=postfix[i]-48;
+					res = postfix[i] - 48;
 				else
 				{
-					int B=pop();
-					int A=pop();
+					int B = pop();
+					int A = pop();
 					switch(postfix[i])
 					{
 						case '+':
@@ -66,13 +70,20 @@ class eval
 				}
 				push(res);
 				i++;
+				//cout<<stack[top];
 			}
+		}
+		void display()
+		{
+			cout<<"The result is\n";
 			cout<<stack[top];
 		}
 };
 int main()
 {
-	eval e;
-	e.find();
+	Evaluate e;
+	e.input();
+	e.evaluateExp();
+	e.display();
 	return 0;
 }

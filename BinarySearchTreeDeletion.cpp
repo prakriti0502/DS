@@ -54,26 +54,51 @@ void create_BST()
 		cin>>num;
 	}
 }
-void search()
+void del_leafNode(BST *parent,BST *check)
 {
-	BST *check = new BST;
+	if(parent->info < check->info)
+		parent->right = NULL;
+	else
+		parent->left = NULL;
+	delete check;
+}
+void del_singleChild(BST *par,BST *ptr)
+{
+	if(par->info >= ptr->info)
+	{
+		if(ptr->left!=NULL)
+			par->left = ptr->left;
+		else
+			par->left = ptr->right;
+	}
+	else
+	{
+		if(ptr->left != NULL)
+			par->right = ptr->left;
+		else
+			par->right = ptr->right;
+	}
+}
+void search_del()
+{
+	BST *check;
 	check = root;
 	BST *parent = new BST;
 	parent = NULL;
 	int num;
-	cout<<"Enter element you wanna search\n";
+	cout<<"Enter element you wanna delete\n";
 	cin>>num;
 	while(1)
 	{
 		if(check->info == num)
 		{
-			if(parent == NULL)
+			if(check->left == NULL && check->right == NULL)
 			{
-				cout<<"Element found at root\n";
+				del_leafNode(parent,check);
 			}
-			else
+			else if(check->left!=NULL || check->right!=NULL) //if both will be null it will go in first case.
 			{
-				cout<<"Parent is "<<parent->info<<endl;
+				del_singleChild(parent,check);
 			}
 			break;
 		}
@@ -87,48 +112,6 @@ void search()
 			parent = check;
 			check = check->left;
 		}
-		else
-		{
-			cout<<"Number not found\n";
-			break;
-		}
-	}
-}
-void findMin()
-{
-	BST *check = new BST;
-	check = root;
-	while(check->left!=NULL)
-	{
-		check = check->left;
-	}
-	cout<<"Minimum element is "<<check->info<<endl;
-}
-void findMax()
-{
-	BST *check = new BST;
-	check = root;
-	while(check->right!=NULL)
-	{
-		check = check->right;
-	}
-	cout<<"Maximum element is "<<check->info<<endl;
-}
-void Level_order_traversing()
-{
-	BST *ptr ;
-	queue <BST *> myqueue;
-	myqueue.push(root);
-	ptr = myqueue.front();
-	while(!myqueue.empty())
-	{
-		myqueue.pop();
-		cout<<ptr->info<<"\t";
-		if(ptr->left != NULL)
-			myqueue.push(ptr->left);
-		if(ptr->right != NULL)  //we have to check both left and right, thats why we use if and if and not else.
-			myqueue.push(ptr->right);
-		ptr=myqueue.front();
 	}
 }
 void inOrder_withoutRec()
@@ -155,18 +138,15 @@ void inOrder_withoutRec()
 }
 int main()
 {
+	cout<<"To continue press y, to discontinue press n \n";
 	char ch;
-	int what;
-	cout<<"To continue press y and to discontinue press n\n";
+	int what,val;
 	cin>>ch;
-	while(ch!='n')
+	while(ch == 'y')
 	{
-		cout<<"To insert elements press 1\n";
-		cout<<"To search an element press 2\n";
-		cout<<"To find minimum element press 3\n";
-		cout<<"To find maximum element press 4\n";
-		cout<<"For level order traversing(left then right), press 5\n";
-		cout<<"For InOrderTraversal without recursion, press 6\n";
+		cout<<"To enter values in tree, press 1\n";
+		cout<<"To delete leaf node, press 2\n";
+		cout<<"For in order traversal, press 3\n";
 		cin>>what;
 		switch(what)
 		{
@@ -177,31 +157,16 @@ int main()
 				}
 			case 2:
 				{
-					search();
+					search_del();
 					break;
 				}
 			case 3:
-				{
-					findMin();
-					break;
-				}
-			case 4:
-				{
-					findMax();
-					break;
-				}
-			case 5:
-				{
-					Level_order_traversing();
-					break;
-				}
-			case 6:
 				{
 					inOrder_withoutRec();
 					break;
 				}
 		}
-		cout<<"To continue press y and to discontinue press n\n";
+		cout<<"To continue press y, to discontinue press n \n";
 		cin>>ch;
 	}
 	return 0;

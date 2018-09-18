@@ -33,7 +33,7 @@ class ListQueue
 		}
 		int dequeue()
 		{
-			node *ptr=new node;
+			node *ptr;
 			int x;
 			ptr=front;
 			x=ptr->val;

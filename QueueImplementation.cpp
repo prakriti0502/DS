@@ -14,7 +14,7 @@ bool isEmpty()
 void enqueue(int num)
 {
 	if(rear==MAX-1) //fully filled
-		cout<<"Queue is empty\n";
+		cout<<"Queue is full\n";
 	else if(isEmpty()) //if it is empty
 	{
 		++rear;
