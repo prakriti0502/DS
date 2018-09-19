@@ -153,6 +153,23 @@ void inOrder_withoutRec()
 	}while(!stk.empty() || ptr!=NULL);
 	cout<<endl;
 }
+void preOrder_withoutRec()
+{
+	BST *ptr;
+	stack <BST *> mystack;
+	mystack.push(root);
+	while(!mystack.empty())
+	{
+		ptr = mystack.top();
+		mystack.pop();
+		cout<<ptr->info;
+		if(ptr->right!=NULL)
+			mystack.push(ptr->right);
+		if(ptr->left!=NULL)
+			mystack.push(ptr->left);
+	}
+	cout<<"\n";
+}
 int main()
 {
 	char ch;
@@ -167,6 +184,7 @@ int main()
 		cout<<"To find maximum element press 4\n";
 		cout<<"For level order traversing(left then right), press 5\n";
 		cout<<"For InOrderTraversal without recursion, press 6\n";
+		cout<<"For PreOrderTraversal without recursion, press 7\n";
 		cin>>what;
 		switch(what)
 		{
@@ -198,6 +216,11 @@ int main()
 			case 6:
 				{
 					inOrder_withoutRec();
+					break;
+				}
+			case 7:
+				{
+					preOrder_withoutRec();
 					break;
 				}
 		}
