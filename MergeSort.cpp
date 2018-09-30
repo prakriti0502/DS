@@ -7,20 +7,21 @@ void merging( int arr[] , int p , int q , int r )
 	int n2 = r - q ;
 	int L[n1];
 	int R[n2];
+	int x=p;
 	for( i = 0 ; i < n1 ;i ++ )
 	{
-		L[ i ] = arr[ p ] ;
-		p ++ ;
+		L[ i ] = arr[ x ] ;
+		x ++ ;
 	}
 	for( j = 0 ; j < n2 ; j ++ )
 	{
-		R[ j ] = arr[ q + 1 + j ] ;
+		R[ j ] = arr[ q + 1 ] ;
 		q ++ ;
 	}
 	i = 0 ;
 	j = 0 ;
 	k = p ;
-	while(i<n1 && j<n2)
+	while(i<n1 &&j<n2)
 	{
 		if(L[i]<=R[j])
 		{
@@ -47,14 +48,14 @@ void merging( int arr[] , int p , int q , int r )
 		k++;
 	}
 }
-void mergeSort(int arr[],int l,int r)
+void mergeSort(int arr[],int p,int r)
 {
-	int m = l + (r-1)/2;
-	if(l<r)
+	if(p<r)
 	{
-		mergeSort(arr,l,m);
-		mergeSort(arr,m+1,r);
-		merging(arr,l,m,r);
+		int q = (p + r)/2 ;
+		mergeSort(arr,p,q);
+		mergeSort(arr,q+1,r);
+		merging(arr,p,q,r);
 	}
 }
 void print(int arr[],int size)

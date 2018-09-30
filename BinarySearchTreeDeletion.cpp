@@ -79,6 +79,20 @@ void del_singleChild(BST *par,BST *ptr)
 			par->right = ptr->right;
 	}
 }
+int del_twoChild(BST *test,BST *save)
+{
+	while(test->left != NULL)
+	{
+		save = test;
+		test = test->left;
+	}
+	int x=test->info;
+	if(test->left==NULL && test->right==NULL)
+		del_leafNode(save,test);
+	else
+		del_singleChild(save,test);
+	return x;
+}
 void search_del()
 {
 	BST *check;
@@ -95,6 +109,12 @@ void search_del()
 			if(check->left == NULL && check->right == NULL)
 			{
 				del_leafNode(parent,check);
+			}
+			else if(check->left!=NULL && check->right!=NULL) //for a node with 2 children
+			{
+				parent = check;
+				int value=del_twoChild(check->right,parent);
+				check->info=value;
 			}
 			else if(check->left!=NULL || check->right!=NULL) //if both will be null it will go in first case.
 			{
@@ -145,7 +165,7 @@ int main()
 	while(ch == 'y')
 	{
 		cout<<"To enter values in tree, press 1\n";
-		cout<<"To delete leaf node, press 2\n";
+		cout<<"To delete a node, press 2\n";
 		cout<<"For in order traversal, press 3\n";
 		cin>>what;
 		switch(what)

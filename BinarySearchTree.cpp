@@ -114,6 +114,18 @@ void findMax()
 	}
 	cout<<"Maximum element is "<<check->info<<endl;
 }
+void inOrder_withRec(BST *curr)
+{
+	if(root==NULL)
+		return;
+	if(curr!=NULL)
+	{
+		inOrder_withRec(curr->left);
+		cout<<curr->info<<"\t";
+		inOrder_withRec(curr->right);
+	}
+	cout<<endl;
+}
 void Level_order_traversing()
 {
 	BST *ptr ;
@@ -185,6 +197,7 @@ int main()
 		cout<<"For level order traversing(left then right), press 5\n";
 		cout<<"For InOrderTraversal without recursion, press 6\n";
 		cout<<"For PreOrderTraversal without recursion, press 7\n";
+		cout<<"For InOrderTraversal with recursion press 8\n";
 		cin>>what;
 		switch(what)
 		{
@@ -221,6 +234,11 @@ int main()
 			case 7:
 				{
 					preOrder_withoutRec();
+					break;
+				}
+			case 8:
+				{
+					inOrder_withRec(root);
 					break;
 				}
 		}

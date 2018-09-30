@@ -1,17 +1,17 @@
 #include<iostream>
 using namespace std;
-void swap(int a,int b)
+void swap(int *a,int *b)
 {
 	int temp;
-	temp = a;
-	a = b;
-	b = temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 int partition(int arr[],int low,int high)
-{ cout<<"hello";
+{ //cout<<"hello";
 	int pivot = arr[high];
 	int i = low - 1;
-	for(int j = low ; j <= high ; j ++)
+	for(int j = low ; j < high ; j ++)
 	{
 		if(arr[j]<=pivot)
 		{
@@ -19,12 +19,12 @@ int partition(int arr[],int low,int high)
 			swap(arr[i],arr[j]);
 		}
 	}
-	swap(arr[i+1],arr[high]);
+	swap(&arr[i+1],&arr[high]);
 	return i + 1;
 }
 void quickSort(int arr[],int low,int high)
 {
-	cout<<"QS Function\n";
+	//cout<<"QS Function\n";
 	if(low<high)
 	{
 		int pi = partition(arr,low,high);
@@ -48,6 +48,8 @@ int main()
 	cout<<"Enter array\n";
 	for(int i=0;i<n;i++)
 		cin>>arr[i];
+	cout<<"Array is\n";
+	printArray(arr,n);
 	quickSort(arr,0,n-1);
 	printArray(arr,n);
 	return 0;
