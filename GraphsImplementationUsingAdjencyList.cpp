@@ -8,44 +8,47 @@ struct node
 class GRAPH
 {
 	int v,e;
-	node **start;
+	node *start[4];
+	node *temp;
+	node *ptr;
 	public:
 		GRAPH(int ver,int edg)
 		{
-			start = new node*[ver];
 			v = ver;
 			e = edg;
-		}
-		void create_graph()
-		{
-			int val;
 			for(int i=0;i<v;i++)
 			{
 				start[i] = NULL;
 			}
+		}
+		void create_graph()
+		{
+			int val;
+			
 			for(int i=0;i<v;i++)
 			{
 				cout<<"Enter the nodes to be connected for "<<i<<" node and press -1 to stop\n";
 				cin>>val;
-				node *temp = new node;
+					
 				while(val != -1)
 				{
+					temp = new node;
 					temp->data = val;
 					temp->next = NULL;
 					if(start[i] == NULL)
 					{
 						start[i] = temp;
-						//cout<<"chaling\n";
 					}
 					else
 					{
-						node *ptr;
+						
 						ptr=start[i];
-						while(ptr!= NULL)
+						while(ptr->next!= NULL)
 							ptr = ptr->next;
-						ptr= temp;
-					//	ptr = temp;
+						ptr->next = temp;
 					}
+					cout<<"\nEnter next ";
+					
 					cin>>val;
 				}
 			}
@@ -53,7 +56,7 @@ class GRAPH
 		void display()
 		{
 			node *ptr;
-			cout<<"The adjancy list is\n";
+			cout<<"The adjancey list is\n";
 			for(int i=0;i<v;i++)
 			{
 				ptr = start[i];
@@ -61,9 +64,7 @@ class GRAPH
 				{
 					cout<<ptr->data<<"\t";
 					ptr = ptr->next;
-					//cout<<"kyuji";
 				}
-				//cout<<"\nHaw";
 				cout<<endl;
 			}
 		}

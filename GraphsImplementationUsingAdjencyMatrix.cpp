@@ -9,8 +9,7 @@ class GRAPH
 		{
 			cout<<"Enter number of vertices and edges\n";
 			cin>>v>>e;
-			AM = new int *[v];
-			
+			AM = new int *[v];	
 			for(int i=0;i<v;i++)
 			{
 				
