@@ -8,7 +8,7 @@ void swap(int *a,int *b)
 	*b = temp;
 }
 int partition(int arr[],int low,int high)
-{ //cout<<"hello";
+{ 
 	int pivot = arr[high];
 	int i = low - 1;
 	for(int j = low ; j < high ; j ++)
@@ -24,7 +24,6 @@ int partition(int arr[],int low,int high)
 }
 void quickSort(int arr[],int low,int high)
 {
-	//cout<<"QS Function\n";
 	if(low<high)
 	{
 		int pi = partition(arr,low,high);
