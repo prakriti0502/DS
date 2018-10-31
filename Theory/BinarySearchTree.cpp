@@ -116,7 +116,7 @@ void findMax()
 }
 void inOrder_withRec(BST *curr)
 {
-	if(root==NULL)
+	if(curr==NULL)
 		return;
 	if(curr!=NULL)
 	{
@@ -125,6 +125,29 @@ void inOrder_withRec(BST *curr)
 		inOrder_withRec(curr->right);
 	}
 	cout<<endl;
+}
+void preOrder_withRec(BST *curr)
+{
+	if(curr==NULL)
+		return;
+	if(curr!=NULL)
+	{
+		cout<<curr->info<<"\t";
+		preOrder_withRec(curr->left);
+		preOrder_withRec(curr->right);
+	}
+	cout<<endl;
+}
+void postOrder_withRec(BST *curr)
+{
+	if(curr==NULL)
+		return;
+	if(curr!=NULL)
+	{
+		postOrder_withRec(curr->left);
+		postOrder_withRec(curr->right);
+		cout<<curr->info<<" ";
+	}
 }
 void Level_order_traversing()
 {
@@ -182,6 +205,21 @@ void preOrder_withoutRec()
 	}
 	cout<<"\n";
 }
+/*void postOrder_withoutRec()
+{
+	BST *ptr=root;
+	stack <BST *> stk;
+	while(!stk.empty())
+	{
+		if(ptr->right!=NULL)
+			stk.push(ptr->right);
+		stk.push(root);
+		ptr=root;
+		if(ptr->left!=NULL)
+			stk.push(ptr->left);
+		
+	}
+}*/
 int main()
 {
 	char ch;
@@ -198,6 +236,8 @@ int main()
 		cout<<"For InOrderTraversal without recursion, press 6\n";
 		cout<<"For PreOrderTraversal without recursion, press 7\n";
 		cout<<"For InOrderTraversal with recursion press 8\n";
+		cout<<"For PreOrder Traversal with recursion press 9\n";
+		cout<<"For PostOrder traversal with recursion press 10\n";
 		cin>>what;
 		switch(what)
 		{
@@ -239,6 +279,16 @@ int main()
 			case 8:
 				{
 					inOrder_withRec(root);
+					break;
+				}
+			case 9:
+				{
+					preOrder_withRec(root);
+					break;
+				}
+			case 10:
+				{
+					postOrder_withRec(root);
 					break;
 				}
 		}
