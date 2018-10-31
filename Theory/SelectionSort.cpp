@@ -20,11 +20,11 @@ int main()
    {
     if(arr[j]<arr[index])
     {
-      index=j;
+      index=j; //finding smallest element in array and putting it to first position
     }
    }
    if(index!=i)
-   {
+   { 
     int t=arr[i];
     arr[i]=arr[index];
     arr[index]=t;
