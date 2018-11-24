@@ -1,54 +1,64 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class GRAPH
-{
-	int v,e;
-	int **AM;
-	public:
-		GRAPH()
-		{
-			cout<<"Enter number of vertices and edges\n";
-			cin>>v>>e;
-			AM = new int *[v];	
-			for(int i=0;i<v;i++)
-			{
-				
-				AM[i] = new int[v];
-			}
-			
-					for(int i=0;i<v;i++)
-			{
-				for(int j=0;j<v;j++)
-					AM[i][j] = 0;
-				 
-			}
-		}
-		void create_graph()
-		{
-			int v1,v2;
-			for(int i=0;i<e;i++)
-			{
-				cout<<"Enter the 2 vertices in which you want to make connection\n";
-				cin>>v1>>v2;
-				AM[v1][v2] = 1;
-			}
-		}
-		void display()
-		{
-			cout<<"The adjancy matrix is\n";
-			for(int i=0;i<v;i++)
-			{
-				for(int j=0;j<v;j++)
-					cout<<AM[i][j]<<"\t";
-				cout<<endl;
-			}
-			cout<<endl;
-		}
+
+class Graph {
+private:
+      bool** adjMatrix;
+      int numVertices;
+public:
+      Graph(int numVertices) {
+            this->numVertices = numVertices;
+            adjMatrix = new bool*[numVertices];
+            for (int i = 0; i < numVertices; i++) {
+                  adjMatrix[i] = new bool[numVertices];
+                  for (int j = 0; j < numVertices; j++)
+                        adjMatrix[i][j] = false;
+          }
+    }
+ 
+      void addEdge(int i, int j) {
+                  adjMatrix[i][j] = true;
+                  adjMatrix[j][i] = true;
+    }
+ 
+      void removeEdge(int i, int j) {
+                  adjMatrix[i][j] = false;
+                  adjMatrix[j][i] = false;
+    }
+ 
+      bool isEdge(int i, int j) {
+                  return adjMatrix[i][j];
+    }
+
+    void toString() {
+      for (int i = 0; i < numVertices; i++) {
+                  cout << i << " : ";
+                  for (int j = 0; j < numVertices; j++)
+                        cout << adjMatrix[i][j] << " ";
+                  cout << "\n";
+      }
+
+    }
+    ~Graph() {
+            for (int i = 0; i < numVertices; i++)
+                  delete[] adjMatrix[i];
+            delete[] adjMatrix;
+    }
 };
 int main()
 {
-	GRAPH g;
-	g.create_graph();
-	g.display();
-	return 0;
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.toString();
+        /* Outputs
+           0: 0 1 1 0 
+           1: 1 0 1 0 
+           2: 1 1 0 1 
+           3: 0 0 1 0 
+          */
+    return 0;
 }
