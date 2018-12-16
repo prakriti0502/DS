@@ -54,6 +54,26 @@ void create_BST()
 		cin>>num;
 	}
 }
+void sumOfSingleChildedNodes(BST *curr,int *sum)
+{
+	if(curr==NULL)
+		return;
+	if((curr->left==NULL && curr->right!=NULL) || (curr->left!=NULL && curr->right==NULL) )
+	{
+		*sum+=curr->info;
+	}
+	sumOfSingleChildedNodes(curr->left,sum);
+	sumOfSingleChildedNodes(curr->right,sum);
+}
+void sumOfLeafNodes(BST *curr,int *sum)
+{
+	if(curr==NULL)
+		return;
+	if(curr->left==NULL && curr->right==NULL)
+		*sum+=curr->info;
+	sumOfLeafNodes(curr->left,sum);
+	sumOfLeafNodes(curr->right,sum);
+}
 void mirror(BST *curr)
 {
 	if(curr==NULL)
@@ -252,6 +272,7 @@ int main()
 {
 	char ch;
 	int what;
+	int sum=0,sum1=0;
 	cout<<"To continue press y and to discontinue press n\n";
 	cin>>ch;
 	while(ch!='n')
@@ -268,6 +289,8 @@ int main()
 		cout<<"For PostOrder traversal with recursion press 10\n";
 		cout<<"For mirror image of tree press 11\n";
 		cout<<"For max depth press 12\n";
+		cout<<"To find sum of nodes having single child press 13\n";
+		cout<<"To find sum of leaf nodes press 14\n";
 		cin>>what;
 		switch(what)
 		{
@@ -331,6 +354,17 @@ int main()
 					int d=depth(root);
 					cout<<"Max depth is "<<d<<endl;
 					break;
+				}
+			case 13:
+				{
+					sumOfSingleChildedNodes(root,&sum);
+					cout<<"Sum is "<<sum<<endl;
+					break;
+				}
+			case 14:
+				{
+					sumOfLeafNodes(root,&sum1);
+					cout<<"Sum is "<<sum1<<endl;
 				}
 		}
 		cout<<"To continue press y and to discontinue press n\n";
