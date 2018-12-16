@@ -68,6 +68,20 @@ void mirror(BST *curr)
 		curr->right=t;
 	}
 }
+int depth(BST *curr)
+{
+	if(curr==NULL)
+		return 0;
+	else
+	{
+		int l=depth(curr->left);
+		int r=depth(curr->right);
+		if(l>r)
+			return l+1;
+		else
+			return r+1;
+	}
+}
 void search()
 {
 	BST *check = new BST;
@@ -253,6 +267,7 @@ int main()
 		cout<<"For PreOrder Traversal with recursion press 9\n";
 		cout<<"For PostOrder traversal with recursion press 10\n";
 		cout<<"For mirror image of tree press 11\n";
+		cout<<"For max depth press 12\n";
 		cin>>what;
 		switch(what)
 		{
@@ -309,6 +324,12 @@ int main()
 			case 11:
 				{
 					mirror(root);
+					break;
+				}
+			case 12:
+				{
+					int d=depth(root);
+					cout<<"Max depth is "<<d<<endl;
 					break;
 				}
 		}
