@@ -54,6 +54,20 @@ void create_BST()
 		cin>>num;
 	}
 }
+void mirror(BST *curr)
+{
+	if(curr==NULL)
+		return;
+	else
+	{
+		BST *t;
+		mirror(curr->left);
+		mirror(curr->right);
+		t=curr->left;
+		curr->left=curr->right;
+		curr->right=t;
+	}
+}
 void search()
 {
 	BST *check = new BST;
@@ -238,6 +252,7 @@ int main()
 		cout<<"For InOrderTraversal with recursion press 8\n";
 		cout<<"For PreOrder Traversal with recursion press 9\n";
 		cout<<"For PostOrder traversal with recursion press 10\n";
+		cout<<"For mirror image of tree press 11\n";
 		cin>>what;
 		switch(what)
 		{
@@ -289,6 +304,11 @@ int main()
 			case 10:
 				{
 					postOrder_withRec(root);
+					break;
+				}
+			case 11:
+				{
+					mirror(root);
 					break;
 				}
 		}
