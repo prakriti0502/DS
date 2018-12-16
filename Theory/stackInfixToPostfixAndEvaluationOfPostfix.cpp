@@ -8,7 +8,7 @@ class inf
 	char stk[50];
 	char post[50];
 	char infi[50];
-	char stack[50];
+	int stack[50];
 	public:
 		inf()
 		{
@@ -41,18 +41,14 @@ class inf
 		}
 		void calculate()
 		{
-			//cout<<"inside calculate";
 			while(infi[i]!='\0')
 			{
-				//cout<<"\nsomething going in while\n";
 				if(isalnum(infi[i]))
 					inspo(infi[i]);
 				else if(infi[i]=='+'||infi[i]=='-'||infi[i]=='*'||infi[i]=='/'||infi[i]=='^')
 				{
-					//cout<<"True";
 					if(prece(infi[i])<=prece(stk[top]))
 					{
-						//cout<<"\nPreless";
 						while(prece(infi[i])<=prece(stk[top]))
 							pop();  
  						push(infi[i]);
@@ -62,7 +58,6 @@ class inf
 				}
 				else if(infi[i]=='(')
 				{
-					//push(infi[i]);
 					top++;
 					stk[top]=infi[i];
 				}
@@ -138,8 +133,6 @@ class inf
 					}
 				}
 				pushG(res);
-				//cout<<res;
-				//cout<<stack[topp]<<"\t";
 				h++;
 			}
 			cout<<"\nResult is "<<stack[topp];
