@@ -1,38 +1,44 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
-int main(int argc, char** argv) 
+int main()
 {
-	int n,m,x,y,visited[20]={0},visit[20]={0},stk[20],top=0,adj[20][20];
-	cin>>n; //vertices
-	cin>>m; //edges
-	for(int i=0;i<m;i++)
+	int v,e,visit[20]={0},visited[20]={0},adj[20][20]={0};
+	int stk[20],top=0;
+	cout<<"Vertices: \n";
+	cin>>v;
+	cout<<"Edges: \n";
+	cin>>e;
+	int x,y;
+	cout<<"Enter connected edges\n";
+	for(int i=0;i<e;i++)
 	{
 		cin>>x>>y;
 		adj[x][y]=1;
 		adj[y][x]=1;
 	}
-	int v=2; //source vertex
-	cout<<v;
-	visited[v]=1;
+	int sou;
+	cout<<"Source vertex: \n";
+	cin>>sou;
+	cout<<sou;
+	visited[sou]=1;
 	int k=1;
-	while(k<n)
+	while(k<v)
 	{
-		for(int j=n-1;j>=0;j--)
+		for(int j=v-1;j>=0;j--)
 		{
-			if(adj[v][j]!=0 && visited[j]!=1 && visit[j]!=1)
+			if(adj[sou][j]!=0 && visited[j]!=1 && visit[j]!=1)
 			{
 				visit[j]=1;
 				stk[top]=j;
 				top++;
 			}
+			
 		}
-		v=stk[--top];
-		cout<<" "<<v;
-		visit[v]=0;
-		visited[v]=1;
-		k++;
+		sou=stk[--top];
+			cout<<" "<<sou;
+			visited[sou]=1;
+			visit[sou]=0;
+			k++;
 	}
 	return 0;
 }
